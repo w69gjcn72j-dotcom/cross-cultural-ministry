@@ -71,6 +71,7 @@ STRINGS = {
     "en": {
         "summary_label": "Summary",
         "back": "All essays",
+        "home_label": "Home",
         "label_class": "",
         "meta_class": "post-meta",
         "back_class": "backlink",
@@ -82,6 +83,7 @@ STRINGS = {
     "zh": {
         "summary_label": "摘要",
         "back": "返回文章目錄",
+        "home_label": "首頁",
         "label_class": " cjk",
         "meta_class": "post-meta cjk",
         "back_class": "backlink cjk",
@@ -586,7 +588,7 @@ PAGE = """<!DOCTYPE html>
       <path d="M512 352V792M438 470H586" stroke="#E8B08C" stroke-width="23" stroke-linecap="round"/>
     </svg>
     <div>
-      <h1><a href="{index}" style="color:inherit;text-decoration:none">{site_title}</a></h1>
+      <h1><a href="{home}" style="color:inherit;text-decoration:none">{site_title}</a></h1>
       <p class="byline{label_class}">{author}</p>
     </div>
   </div>
@@ -613,7 +615,7 @@ PAGE = """<!DOCTYPE html>
 <footer class="footer">
   <div class="footer-inner">
     <p>{footer}</p>
-    <p><a href="{index}">{back}</a></p>
+    <p><a href="{index}">{back}</a> &nbsp;·&nbsp; <a href="{home}">{home_label}</a></p>
   </div>
 </footer>
 
@@ -861,6 +863,8 @@ def main():
         num="%03d" % number,
         manifest=s["manifest"],
         index=SITE["index"]["zh" if lang == "zh" else "en"],
+        home=SITE["home"]["zh" if lang == "zh" else "en"],
+        home_label=s["home_label"],
         author=html.escape(SITE["author"]["zh" if lang == "zh" else "en"]),
         footer=html.escape(SITE["footer"]["zh" if lang == "zh" else "en"]),
         back=s["back"],

@@ -4,15 +4,15 @@ Summary: Who I am, the parish I serve, and why a Hong Kong–born minister in a 
 
 [youtube: D-qSe4Qr5z0 | The introduction I recorded for my Doctor of Ministry cohort. Roughly the same ground as what follows, in about the time it takes to make a cup of tea.]
 
-[note] What follows is the same introduction in writing, for anyone who would rather read than watch. **A note on names.** Throughout this site I write about the parish I serve without naming it. The people I describe are real, they are dear to me, and some of what I have had to say about our life together is uncomfortable. It seemed right that the analysis should be public and the congregation should not be.
+[note] What follows is the same introduction in writing, for anyone who would rather read than watch.
 
-My name is David Yung. I am the senior minister of an Anglican parish in southern Sydney — about ten minutes from the airport, twenty from the city.
+My name is David Yung. I am the senior minister of St Paul's Anglican Church Kogarah, in southern Sydney — about ten minutes from the airport, twenty from the city.
 
 I have been married to Jenny for almost twenty-five years, through the ups and downs of life and of ministry. We have three children. Our eldest is studying psychology and primary education, and was married last June to a wonderful Christian man. Our second is studying secondary education at university, majoring in history, and boarding at a Christian college. Our youngest is in Year 11, preparing for her final year of school. We thank God that we have been able to serve our Lord together for many years, and that the older two now serve him in churches of their own.
 
 ## A church older than the country it sits in
 
-I have been at the parish for almost eight years. The church itself has stood for more than a century and a half. It is an Anglican church — Church of England — but it was German immigrants in the 1860s who helped get it started. That detail has come to mean a great deal to me. The congregation that some now think of as the *old* church, the *English* church, the one that was here first, was itself planted with immigrant hands.
+I have been at St Paul's for almost eight years. The church itself has stood for more than a century and a half. It is an Anglican church — Church of England — but it was German immigrants in the 1860s who helped get it started. That detail has come to mean a great deal to me. The congregation that some now think of as the *old* church, the *English* church, the one that was here first, was itself planted with immigrant hands.
 
 For a long time afterwards the church was made up almost entirely of people of English origin. In recent years that has changed. More and more of those who come were not born in England, or in Australia. Some speak English. Many speak Mandarin.
 

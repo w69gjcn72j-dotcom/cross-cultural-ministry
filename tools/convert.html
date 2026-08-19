@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Add an essay — Cross-Cultural Ministry</title>
+<style>
+:root{
+  --ink:#06201F; --ink-raised:#0B2C2B; --clay:#C96F4C; --clay-soft:#E0906C;
+  --text:#ECF1EE; --muted:#9DB4AF; --faint:#6F8B87; --rule:rgba(157,180,175,.18);
+  --ok:#6FBF8A; --bad:#E2705E;
+  --body:"Inter Tight",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --display:Georgia,"Songti SC",serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--body);
+     font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:44rem;margin:0 auto;padding:3rem 1.5rem 5rem}
+h1{font-family:var(--display);font-weight:600;font-size:2rem;margin:0 0 .4rem;letter-spacing:-.02em}
+.sub{color:var(--muted);margin:0 0 2.5rem}
+h2{font-family:var(--display);font-size:1.15rem;margin:2.5rem 0 .8rem;
+   padding-top:.8rem;border-top:1px solid var(--rule)}
+.step{display:flex;gap:.7rem;align-items:baseline}
+.step .n{color:var(--clay);font-size:.75rem;letter-spacing:.14em}
+.drop{display:block;border:2px dashed var(--rule);border-radius:12px;padding:2.5rem 1.5rem;text-align:center;
+      background:var(--ink-raised);cursor:pointer;transition:border-color .15s,background .15s}
+.drop:hover,.drop.over{border-color:var(--clay);background:#0e3634}
+.drop strong{display:block;font-size:1.05rem;margin-bottom:.3rem}
+.drop span{color:var(--faint);font-size:.9rem}
+.drop.done{border-style:solid;border-color:var(--ok)}
+input[type=file]{display:none}
+.field{margin:1rem 0}
+.field label{display:block;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;
+      color:var(--clay);margin-bottom:.35rem}
+input[type=text],input[type=date],select{
+  width:100%;padding:.6rem .75rem;border-radius:8px;border:1px solid var(--rule);
+  background:var(--ink-raised);color:var(--text);font:inherit;font-size:.95rem}
+input:focus,select:focus{outline:2px solid var(--clay-soft);outline-offset:1px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+button{font:inherit;font-size:.95rem;padding:.7rem 1.2rem;border-radius:8px;cursor:pointer;
+       border:1px solid var(--clay);background:var(--clay);color:#06201F;font-weight:600}
+button:hover{background:var(--clay-soft);border-color:var(--clay-soft)}
+button:disabled{opacity:.4;cursor:not-allowed}
+button.ghost{background:none;color:var(--clay-soft)}
+button.ghost:hover{background:rgba(201,111,76,.12);color:var(--clay)}
+.msg{padding:.8rem 1rem;border-radius:8px;margin:1rem 0;font-size:.92rem;line-height:1.5}
+.msg.err{background:rgba(226,112,94,.12);border:1px solid var(--bad);color:#F6C6BC}
+.msg.ok{background:rgba(111,191,138,.1);border:1px solid var(--ok);color:#CBEBD6}
+.msg.note{background:var(--ink-raised);border:1px solid var(--rule);color:var(--muted)}
+.hidden{display:none}
+.preview{border:1px solid var(--rule);border-radius:10px;padding:1.2rem;background:var(--ink-raised);
+         max-height:22rem;overflow:auto;font-size:.9rem;line-height:1.65}
+.preview h3{font-family:var(--display);font-size:1.15rem;margin:1.2rem 0 .5rem;color:var(--text)}
+.preview h4{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);margin:1rem 0 .4rem}
+.preview blockquote{border-left:2px solid var(--clay);margin:.8rem 0;padding-left:1rem;color:var(--muted)}
+.preview table{border-collapse:collapse;width:100%;font-size:.85rem;margin:.6rem 0}
+.preview th,.preview td{border:1px solid var(--rule);padding:.35rem .5rem;text-align:left}
+.preview .sum{border-left:2px solid var(--clay);padding-left:1rem;color:var(--muted);font-style:italic}
+.stats{display:flex;gap:1.5rem;flex-wrap:wrap;color:var(--faint);font-size:.85rem;margin:.8rem 0 0}
+.stats b{color:var(--text);font-weight:600}
+.actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem}
+code{background:rgba(201,111,76,.12);color:var(--clay-soft);padding:.1em .35em;border-radius:4px;font-size:.9em}
+ol.help{color:var(--muted);font-size:.94rem;padding-left:1.2rem}
+ol.help li{margin-bottom:.5rem}
+ol.help b{color:var(--text)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Add an essay</h1>
+  <p class="sub">Drop in a Word document, get back the two files to put in your folder.
+     Everything happens in this page — nothing is uploaded anywhere.</p>
+
+  <div id="unsupported" class="msg err hidden">
+    This browser can't unzip files on its own. Use Chrome, Edge or Safari 16.4 or newer.
+  </div>
+
+  <h2><span class="step"><span class="n">1</span> The Word document</span></h2>
+  <label for="docx" class="drop" id="drop1">
+    <strong id="drop1t">Choose a .docx file, or drag it here</strong>
+    <span id="drop1s">The first line of the document is the title</span>
+  </label>
+  <input type="file" id="docx" accept=".docx">
+
+  <h2><span class="step"><span class="n">2</span> Your current essays page</span></h2>
+  <label for="idx" class="drop" id="drop2">
+    <strong id="drop2t">Choose essays.html, or drag it here</strong>
+    <span id="drop2s">So the new essay gets the right number and joins the list</span>
+  </label>
+  <input type="file" id="idx" accept=".html,.htm">
+
+  <div id="opts" class="hidden">
+    <h2><span class="step"><span class="n">3</span> Check the details</span></h2>
+    <div class="field">
+      <label for="title">Title</label>
+      <input type="text" id="title">
+    </div>
+    <div class="field">
+      <label for="summary">Summary line, shown on the browse page</label>
+      <input type="text" id="summary">
+    </div>
+    <div class="row">
+      <div class="field">
+        <label for="slug">Web address</label>
+        <input type="text" id="slug">
+      </div>
+      <div class="field">
+        <label for="date">Date</label>
+        <input type="date" id="date">
+      </div>
+    </div>
+    <div class="row">
+      <div class="field">
+        <label for="num">Number</label>
+        <input type="text" id="num">
+      </div>
+      <div class="field">
+        <label for="lang">Language</label>
+        <select id="lang">
+          <option value="en">English</option>
+          <option value="zh">Chinese</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="warn"></div>
+
+    <h2><span class="step"><span class="n">4</span> What it will look like</span></h2>
+    <div class="preview" id="prev"></div>
+    <div class="stats" id="stats"></div>
+
+    <h2><span class="step"><span class="n">5</span> Save the two files</span></h2>
+    <div id="saved"></div>
+    <div class="actions">
+      <button id="dl1">Download the essay page</button>
+      <button id="dl2">Download the updated essays page</button>
+    </div>
+
+    <div class="msg note" style="margin-top:1.5rem">
+      <b>Then, in Finder and GitHub Desktop:</b>
+      <ol class="help" style="margin:.6rem 0 0">
+        <li>Move both downloads into your <b>cross-cultural-ministry</b> folder,
+            replacing the old <code>essays.html</code> when asked.</li>
+        <li>Open <b>GitHub Desktop</b>. You should see one new file and one modified file.</li>
+        <li>Type the essay title as the summary, click <b>Commit to main</b>, then <b>Push origin</b>.</li>
+      </ol>
+    </div>
+  </div>
+
+</div>
+
+<script>
+"use strict";
+
+if (typeof DecompressionStream === "undefined") {
+  document.getElementById("unsupported").classList.remove("hidden");
+}
+
+/* ------------------------------------------------------------------ zip */
+
+async function unzipFile(buf, wanted) {
+  const dv = new DataView(buf), u8 = new Uint8Array(buf);
+  let eocd = -1;
+  for (let i = buf.byteLength - 22; i >= 0 && i > buf.byteLength - 66000; i--) {
+    if (dv.getUint32(i, true) === 0x06054b50) { eocd = i; break; }
+  }
+  if (eocd < 0) throw new Error("That doesn't look like a .docx file.");
+  let n = dv.getUint16(eocd + 10, true);
+  let off = dv.getUint32(eocd + 16, true);
+
+  for (let k = 0; k < n; k++) {
+    const nameLen = dv.getUint16(off + 28, true);
+    const extraLen = dv.getUint16(off + 30, true);
+    const cmtLen = dv.getUint16(off + 32, true);
+    const localOff = dv.getUint32(off + 42, true);
+    const name = new TextDecoder().decode(u8.subarray(off + 46, off + 46 + nameLen));
+    if (name === wanted) {
+      const method = dv.getUint16(localOff + 8, true);
+      const lNameLen = dv.getUint16(localOff + 26, true);
+      const lExtraLen = dv.getUint16(localOff + 28, true);
+      const start = localOff + 30 + lNameLen + lExtraLen;
+      const compSize = dv.getUint32(off + 20, true);
+      const slice = u8.subarray(start, start + compSize);
+      if (method === 0) return new TextDecoder().decode(slice);
+      const ds = new DecompressionStream("deflate-raw");
+      const stream = new Blob([slice]).stream().pipeThrough(ds);
+      return await new Response(stream).text();
+    }
+    off += 46 + nameLen + extraLen + cmtLen;
+  }
+  throw new Error("Couldn't find the document text inside that file.");
+}
+
+/* --------------------------------------------------------------- parsing */
+
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const unesc = s => s.replace(/&amp;/g,"&").replace(/&lt;/g,"<").replace(/&gt;/g,">")
+                    .replace(/&quot;/g,'"').replace(/&#(\d+);/g,(m,d)=>String.fromCharCode(d));
+
+function inline(s) {
+  s = s.replace(/\[([^\]\[]+)\]\(([^)\s]+)\)/g, '<a href="$2">$1</a>');
+  s = s.replace(/\*\*(?=\S)(.+?)(?<=\S)\*\*/g, "<strong>$1</strong>");
+  s = s.replace(/(?<!\*)\*(?=\S)([^*]+?)(?<=\S)\*(?!\*)/g, "<em>$1</em>");
+  s = s.replace(/<(strong|em)>\s*<\/\1>/g, "");
+  s = s.replace(/<\/(strong|em)>(\s*)<\1>/g, "$2");
+  return s.trim();
+}
+
+const NS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main";
+const el = (p, t) => Array.from(p.getElementsByTagNameNS(NS, t));
+
+function paraHtml(p) {
+  let out = "";
+  for (const r of el(p, "r")) {
+    let t = "";
+    for (const n of el(r, "t")) t += n.textContent;
+    if (!t) continue;
+    t = esc(t);
+    const rPr = el(r, "rPr")[0];
+    if (rPr) {
+      const b = el(rPr, "b")[0], i = el(rPr, "i")[0];
+      const on = e => e && e.getAttributeNS(NS, "val") !== "0" && e.getAttributeNS(NS, "val") !== "false";
+      if (on(b)) t = "<strong>" + t + "</strong>";
+      if (on(i)) t = "<em>" + t + "</em>";
+    }
+    out += t;
+  }
+  return inline(out || esc(p.textContent));
+}
+
+function classify(line) {
+  const s = line.trim();
+  if (/^(-{3,}|_{3,}|\*{3,}|—{2,})$/.test(s)) return ["rule", ""];
+  let m = s.match(/^(#{2,4})\s+(.*)$/);
+  if (m) return [m[1].length === 2 ? "h2" : "h3", m[2].trim()];
+  if (s.startsWith(">")) return ["quote", s.replace(/^>\s*/, "")];
+  if (/^\s*[-*•·]\s+/.test(s)) return ["bullet", s.replace(/^\s*[-*•·]\s+/, "")];
+  if (/^\s*\d+[.)]\s+/.test(s)) return ["number", s.replace(/^\s*\d+[.)]\s+/, "")];
+  return ["para", s];
+}
+
+function readDocx(xml) {
+  const doc = new DOMParser().parseFromString(xml, "application/xml");
+  const body = el(doc, "body")[0];
+  if (!body) throw new Error("That .docx has no readable body.");
+  const blocks = [];
+  for (const node of Array.from(body.children)) {
+    const tag = node.localName;
+    if (tag === "tbl") {
+      const rows = [];
+      for (const tr of el(node, "tr")) {
+        rows.push(el(tr, "tc").map(tc => inline(esc(tc.textContent.trim()))));
+      }
+      if (rows.length && rows.some(r => r.some(c => c))) blocks.push(["table", rows]);
+      continue;
+    }
+    if (tag !== "p") continue;
+    const text = node.textContent.trim();
+    if (!text) continue;
+    const pStyle = el(node, "pStyle")[0];
+    const style = (pStyle ? pStyle.getAttributeNS(NS, "val") || "" : "").toLowerCase();
+    const html = paraHtml(node);
+
+    if (/^(heading1|heading2|title)/.test(style)) { blocks.push(["h2", html]); continue; }
+    if (/^(heading3|heading4)/.test(style))       { blocks.push(["h3", html]); continue; }
+    if (/quote/.test(style))                      { blocks.push(["quote", html]); continue; }
+    if (/listnumber/.test(style)) { blocks.push(["number", html.replace(/^\s*(?:[-*•·–]|\d+[.)])\s+/, "")]); continue; }
+    if (/list/.test(style))       { blocks.push(["bullet", html.replace(/^\s*(?:[-*•·–]|\d+[.)])\s+/, "")]); continue; }
+
+    const [kind, payload] = classify(text);
+    if (kind !== "para") blocks.push([kind, kind === "rule" ? "" : inline(esc(payload))]);
+    else blocks.push(["para", html]);
+  }
+  return blocks;
+}
+
+/* -------------------------------------------------------------- assembly */
+
+const SUMMARY_PREFIXES = ["summary:", "summary：", "摘要:", "摘要：", "撮要:", "撮要："];
+
+function takeTitle(blocks) {
+  for (let i = 0; i < blocks.length; i++) {
+    const [k, v] = blocks[i];
+    if ((k === "para" || k === "h2" || k === "h3") && typeof v === "string" && v) {
+      const title = unesc(v.replace(/<[^>]+>/g, "")).trim();
+      return [title, blocks.slice(0, i).concat(blocks.slice(i + 1))];
+    }
+  }
+  throw new Error("That document looks empty — I couldn't find a title line.");
+}
+
+function takeSummary(blocks) {
+  for (let i = 0; i < blocks.length; i++) {
+    const [k, v] = blocks[i];
+    if (k !== "para" || typeof v !== "string") continue;
+    const plain = unesc(v.replace(/<[^>]+>/g, "")).trim();
+    const low = plain.toLowerCase();
+    for (const pre of SUMMARY_PREFIXES) {
+      if (low.startsWith(pre)) {
+        return [plain.slice(pre.length).trim(), blocks.slice(0, i).concat(blocks.slice(i + 1))];
+      }
+    }
+    break;
+  }
+  return ["", blocks];
+}
+
+function slugify(t, fallback) {
+  let s = t.normalize("NFKD").replace(/[̀-ͯ]/g, "")
+           .replace(/[^A-Za-z0-9]+/g, "-").replace(/^-+|-+$/g, "").toLowerCase();
+  s = s.split("-").filter(Boolean).slice(0, 8).join("-");
+  return s || fallback;
+}
+
+function detectLang(blocks, title) {
+  const text = title + " " + blocks.map(b => typeof b[1] === "string" ? b[1] : "").join(" ");
+  const cjk = (text.match(/[㐀-鿿豈-﫿]/g) || []).length;
+  const lat = (text.match(/[A-Za-z]/g) || []).length;
+  return cjk > Math.max(20, lat * 0.15) ? "zh" : "en";
+}
+
+function renderBody(blocks) {
+  const out = [];
+  let i = 0;
+  while (i < blocks.length) {
+    const [kind, payload] = blocks[i];
+    if (kind === "bullet" || kind === "number") {
+      const tag = kind === "bullet" ? "ul" : "ol";
+      const items = [];
+      while (i < blocks.length && blocks[i][0] === kind) { items.push("    <li>" + blocks[i][1] + "</li>"); i++; }
+      out.push("  <" + tag + ">\n" + items.join("\n") + "\n  </" + tag + ">");
+      continue;
+    }
+    if (kind === "quote") {
+      const ps = [];
+      while (i < blocks.length && blocks[i][0] === "quote") { ps.push("    <p>" + blocks[i][1] + "</p>"); i++; }
+      out.push("  <blockquote>\n" + ps.join("\n") + "\n  </blockquote>");
+      continue;
+    }
+    if (kind === "table") {
+      const rows = payload, head = rows[0], rest = rows.slice(1);
+      const th = head.map(c => "<th>" + c + "</th>").join("");
+      const trs = rest.map(r => "\n      <tr>" + r.map(c => "<td>" + c + "</td>").join("") + "</tr>").join("");
+      out.push("  <table>\n    <thead><tr>" + th + "</tr></thead>\n    <tbody>" + trs + "\n    </tbody>\n  </table>");
+      i++; continue;
+    }
+    if (kind === "rule") out.push("  <hr>");
+    else if (kind === "h2") out.push("  <h2>" + payload + "</h2>");
+    else if (kind === "h3") out.push("  <h3>" + payload + "</h3>");
+    else out.push("  <p>" + payload + "</p>");
+    i++;
+  }
+  return out.join("\n\n");
+}
+
+const MONTHS = ["January","February","March","April","May","June","July",
+                "August","September","October","November","December"];
+function prettyDate(iso, lang) {
+  const [y,m,d] = iso.split("-").map(Number);
+  return lang === "zh" ? `${y}年${m}月${d}日` : `${d} ${MONTHS[m-1]} ${y}`;
+}
+
+const MARK = `<svg class="mark" viewBox="0 0 1024 1024" role="img" aria-label="ALT">
+      <rect width="1024" height="1024" rx="190" fill="#06201F"/>
+      <line x1="152" y1="690" x2="872" y2="690" stroke="#92705E" stroke-width="16"/>
+      <circle cx="410" cy="540" r="205" fill="none" stroke="#C96F4C" stroke-width="20"/>
+      <circle cx="614" cy="540" r="205" fill="none" stroke="#C96F4C" stroke-width="20"/>
+      <path d="M512 352V792M438 470H586" stroke="#E8B08C" stroke-width="23" stroke-linecap="round"/>
+    </svg>`;
+
+function buildPage(o) {
+  const zh = o.lang === "zh";
+  const S = zh
+    ? {back:"返回文章目錄", backClass:"backlink cjk", metaClass:"post-meta cjk", labelClass:" cjk",
+       sumLabel:"摘要", manifest:"manifest-cn.webmanifest", index:"essays-cn.html",
+       home:"index-cn.html", homeLabel:"首頁", site:"跨文化事奉", author:"翁沛偉牧師",
+       footer:"翁沛偉牧師 Rev David Yung", alt:"兩個相交的圓，十架立於交疊之處", htmlLang:"zh-Hant"}
+    : {back:"All essays", backClass:"backlink", metaClass:"post-meta", labelClass:"",
+       sumLabel:"Summary", manifest:"manifest.webmanifest", index:"essays.html",
+       home:"index.html", homeLabel:"Home", site:"Cross-Cultural Ministry", author:"Rev David Yung",
+       footer:"Rev David Yung 翁沛偉牧師",
+       alt:"Two overlapping circles with a cross standing in the overlap", htmlLang:"en"};
+
+  const num = String(o.n).padStart(3, "0");
+  const sum = o.summary ? `    <div class="summary">
+      <span class="label${S.labelClass}">${S.sumLabel}</span>
+      ${esc(o.summary)}
+    </div>\n` : "";
+
+  return `<!DOCTYPE html>
+<html lang="${S.htmlLang}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>${esc(o.title)} — ${S.site}</title>
+<meta name="description" content="${esc(o.blurb || o.title)}">
+<meta name="theme-color" content="#06201F">
+<meta property="og:title" content="${esc(o.title)}">
+<meta property="og:description" content="${esc(o.blurb || o.title)}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://yungs.au/${o.filename}">
+<meta property="og:image" content="https://yungs.au/icons/icon-512.png">
+<meta property="article:published_time" content="${o.date}">
+<link rel="canonical" href="https://yungs.au/${o.filename}">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="manifest" href="${S.manifest}">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    ${MARK.replace("ALT", S.alt)}
+    <div>
+      <h1><a href="${S.home}" style="color:inherit;text-decoration:none">${S.site}</a></h1>
+      <p class="byline${S.labelClass}">${S.author}</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap narrow">
+
+  <a class="${S.backClass}" href="${S.index}">&larr; ${S.back}</a>
+
+  <div class="essay-head">
+    <div class="${S.metaClass}">
+      <span class="num">${num}</span>
+      <span>${prettyDate(o.date, o.lang)}</span>
+    </div>
+    <h1>${esc(o.title)}</h1>
+${sum}  </div>
+
+  <article class="essay">
+${o.body}
+  </article>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <p>${S.footer}</p>
+    <p><a href="${S.index}">${S.back}</a> &nbsp;·&nbsp; <a href="${S.home}">${S.homeLabel}</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
+`;
+}
+
+/* ------------------------------------------------------- the essays page */
+
+const POSTS_RE = /(const POSTS = \[)([\s\S]*?)(\n\];)/;
+
+function readPosts(src) {
+  const m = src.match(POSTS_RE);
+  if (!m) throw new Error("Couldn't find the POSTS list in that file. Is it essays.html?");
+  const entries = m[2].match(/\{[\s\S]*?\}/g) || [];
+  return entries.map(e => {
+    const g = k => { const r = e.match(new RegExp(k + '\\s*:\\s*"((?:[^"\\\\]|\\\\.)*)"')); return r ? r[1] : ""; };
+    const n = e.match(/\bn\s*:\s*(\d+)/);
+    return { n: n ? +n[1] : null, date: g("date"), slug: g("slug"), title: g("title"), blurb: g("blurb"), raw: e };
+  });
+}
+
+const jsStr = s => s.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+
+function writePosts(src, entry) {
+  const m = src.match(POSTS_RE);
+  const kept = (m[2].match(/\{[\s\S]*?\}/g) || []).filter(e => !e.includes('"' + entry.slug + '"'));
+  const block = `\n  {\n    n: ${entry.n},\n    date: "${entry.date}",\n    slug: "${entry.slug}",\n`
+              + `    title: "${jsStr(entry.title)}",\n    blurb: "${jsStr(entry.blurb)}"\n  }`;
+  const inner = block + (kept.length ? ",\n  " + kept.map(e => e.trim()).join(",\n  ") : "");
+  return src.slice(0, m.index) + m[1] + inner + m[3] + src.slice(m.index + m[0].length);
+}
+
+/* --------------------------------------------------------------- the UI */
+
+const state = { blocks:null, body:null, docxName:"", idxSrc:"", idxName:"", posts:[] };
+const touched = new Set();   // fields the user has edited by hand
+const $ = id => document.getElementById(id);
+
+function wireDrop(dropId, inputId, onFile) {
+  const drop = $(dropId), input = $(inputId);
+  drop.addEventListener("dragover", e => { e.preventDefault(); drop.classList.add("over"); });
+  drop.addEventListener("dragleave", () => drop.classList.remove("over"));
+  drop.addEventListener("drop", e => {
+    e.preventDefault(); drop.classList.remove("over");
+    if (e.dataTransfer.files[0]) onFile(e.dataTransfer.files[0]);
+  });
+  input.addEventListener("change", () => { if (input.files[0]) onFile(input.files[0]); });
+}
+
+function say(where, cls, text) {
+  $(where).innerHTML = '<div class="msg ' + cls + '">' + text + "</div>";
+}
+
+wireDrop("drop1", "docx", async file => {
+  try {
+    if (!file.name.toLowerCase().endsWith(".docx")) throw new Error("That needs to be a .docx file.");
+    const xml = await unzipFile(await file.arrayBuffer(), "word/document.xml");
+    state.blocks = readDocx(xml);
+    state.docxName = file.name;
+    $("drop1t").textContent = "✓ " + file.name;
+    $("drop1s").textContent = state.blocks.length + " paragraphs read";
+    $("drop1").classList.add("done");
+    refresh();
+  } catch (e) {
+    $("drop1t").textContent = "Choose a .docx file, or drag it here";
+    $("drop1").classList.remove("done");
+    say("warn", "err", e.message);
+    $("opts").classList.remove("hidden");
+  }
+});
+
+wireDrop("drop2", "idx", async file => {
+  try {
+    const src = await file.text();
+    state.posts = readPosts(src);
+    state.idxSrc = src;
+    state.idxName = file.name;
+    $("drop2t").textContent = "✓ " + file.name;
+    $("drop2s").textContent = state.posts.length + " essays already listed";
+    $("drop2").classList.add("done");
+    refresh();
+  } catch (e) {
+    $("drop2t").textContent = "Choose essays.html, or drag it here";
+    $("drop2").classList.remove("done");
+    say("warn", "err", e.message);
+  }
+});
+
+let current = null;
+
+function refresh() {
+  if (!state.blocks) return;
+  $("opts").classList.remove("hidden");
+
+  let [title, rest] = takeTitle(state.blocks);
+  let [summary, body] = takeSummary(rest);
+  const lang = detectLang(body, title);
+
+  const existing = state.posts.find(p =>
+    p.title.trim().toLowerCase() === title.trim().toLowerCase());
+  const maxN = state.posts.reduce((a, p) => Math.max(a, p.n || 0), 0);
+  const n = existing ? existing.n : maxN + 1;
+
+  const set = (id, v) => { if (!touched.has(id)) $(id).value = v; };
+  set("title", title);
+  set("summary", summary);
+  set("date", new Date().toISOString().slice(0, 10));
+  set("slug", slugify(title, "post-" + String(n).padStart(3, "0")));
+  set("num", n);
+  set("lang", lang);
+
+  const warn = [];
+  if (!state.idxSrc) warn.push('<div class="msg note">Add your <b>essays.html</b> above and I can '
+    + 'work out the number and hand you the updated list. Without it you would have to edit that file yourself.</div>');
+  if (existing) warn.push('<div class="msg ok">This title is already published as number '
+    + existing.n + '. It will be <b>updated in place</b> rather than added again.</div>');
+  $("warn").innerHTML = warn.join("");
+
+  state.body = body;
+  rebuild(body);
+}
+
+function rebuild(body) {
+  const lang = $("lang").value;
+  const title = $("title").value.trim();
+  const summary = $("summary").value.trim();
+  const date = $("date").value;
+  const n = parseInt($("num").value, 10) || 1;
+  const slug = ($("slug").value.trim() || "post") + (lang === "zh" ? "-cn" : "");
+  const filename = String(n).padStart(3, "0") + "-" + slug + ".html";
+
+  let blurb = summary;
+  if (!blurb) {
+    const first = body.find(b => b[0] === "para");
+    blurb = first ? unesc(first[1].replace(/<[^>]+>/g, "")) : title;
+  }
+  const limit = lang === "zh" ? 90 : 200;
+  if (blurb.length > limit) {
+    const cut = blurb.slice(0, limit);
+    const stop = Math.max(cut.lastIndexOf("。"), cut.lastIndexOf(". "));
+    blurb = stop > limit * 0.45 ? cut.slice(0, stop + 1).trim()
+          : cut.replace(/\s+\S*$/, "").replace(/[ ,;:—–-]+$/, "") + "…";
+  }
+
+  const rendered = renderBody(body);
+  current = {
+    page: buildPage({ lang, title, summary, date, n, filename, blurb, body: rendered }),
+    filename,
+    idx: state.idxSrc ? writePosts(state.idxSrc, { n, date, slug: filename, title, blurb }) : null,
+    idxName: state.idxName || (lang === "zh" ? "essays-cn.html" : "essays.html"),
+  };
+
+  $("prev").innerHTML =
+    (summary ? '<div class="sum">' + esc(summary) + "</div>" : "")
+    + rendered.replace(/<h2>/g, "<h3>").replace(/<\/h2>/g, "</h3>")
+              .replace(/<h3>(?=[^<]*<\/h3>)/g, "<h4>").replace(/<\/h3>/g, "</h4>");
+
+  const counts = {};
+  body.forEach(b => counts[b[0]] = (counts[b[0]] || 0) + 1);
+  const words = rendered.replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).length;
+  $("stats").innerHTML =
+      "<span>File <b>" + filename + "</b></span>"
+    + "<span>About <b>" + words.toLocaleString() + "</b> words</span>"
+    + "<span>Headings <b>" + ((counts.h2 || 0) + (counts.h3 || 0)) + "</b></span>"
+    + (counts.table ? "<span>Tables <b>" + counts.table + "</b></span>" : "")
+    + (counts.quote ? "<span>Quotations <b>" + counts.quote + "</b></span>" : "");
+
+  $("dl2").disabled = !current.idx;
+}
+
+function download(name, text) {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([text], { type: "text/html;charset=utf-8" }));
+  a.download = name;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+}
+
+["title","summary","slug","date","num","lang"].forEach(id => {
+  const node = $(id);
+  const mark = () => { touched.add(id); if (state.body) rebuild(state.body); };
+  node.addEventListener("input", mark);
+  node.addEventListener("change", mark);
+});
+
+$("dl1").onclick = () => {
+  if (!current) return;
+  download(current.filename, current.page);
+  say("saved", "ok", "Saved <b>" + current.filename + "</b> to your Downloads folder.");
+};
+$("dl2").onclick = () => {
+  if (!current || !current.idx) return;
+  download(current.idxName, current.idx);
+  say("saved", "ok", "Saved <b>" + current.idxName + "</b> to your Downloads folder. "
+    + "Move it into the project folder, replacing the old one.");
+};
+</script>
+</body>
+</html>

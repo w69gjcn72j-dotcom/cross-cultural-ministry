@@ -13,9 +13,13 @@
     "en": "Rev David Yung 翁沛偉牧師",
     "zh": "翁沛偉牧師 Rev David Yung"
   },
-  "index": {
+  "home": {
     "en": "index.html",
     "zh": "index-cn.html"
+  },
+  "index": {
+    "en": "essays.html",
+    "zh": "essays-cn.html"
   },
   "suffix": {
     "en": "",

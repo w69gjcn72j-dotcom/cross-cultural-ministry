@@ -7,7 +7,13 @@ Plain HTML on GitHub Pages. No build step, no dependencies at read time.
 
 ## Adding an essay
 
-Write it in Word. The **first line is the title**. Then:
+**No Terminal:** double-click `tools/convert.html`, drag in the Word file and
+`essays.html`, download the two files it gives you, and commit in GitHub
+Desktop. Full instructions in `ADDING-ESSAYS.md`. This is the everyday route.
+
+**With Terminal**, `add-post.py` does the same and a little more — figures,
+videos, reference lists, and `--check`. Write it in Word. The **first line is
+the title**. Then:
 
 ```
 python3 add-post.py my-essay.docx
@@ -113,8 +119,10 @@ Your study libraries are untouched by any of this. They stay on their
 ## What's in here
 
 ```
-index.html            English browse page — holds const POSTS = [...]
-index-cn.html         Chinese browse page — holds its own const POSTS
+index.html            the title page — three doors and the links list
+index-cn.html         the Chinese title page
+essays.html           English browse page — holds const POSTS = [...]
+essays-cn.html        Chinese browse page — holds its own const POSTS
 00N-*.html            one file per essay
 404.html
 style.css             the whole design, in one file
@@ -126,6 +134,7 @@ icons/                the mark, at every size
 figures/              diagrams, as SVG
 media/                the introduction video goes here
 favicon.ico
+tools/convert.html    the browser converter — double-click it, no install
 tools/gen_icons.py    redraws the icons; only needed if the mark changes
 drafts/               the source files every published essay was made from
 CNAME                 yungs.au
@@ -139,19 +148,40 @@ to revise a piece, rather than editing the HTML.
 `add-post.py` needs `python-docx` for Word files:
 `pip3 install python-docx`
 
+## Adding a link to the title page
+
+Open `index.html`, find `<ul class="linklist">`, and copy one of the entries:
+
+```html
+<li>
+  <a href="https://example.org" rel="noopener">The name of the thing</a>
+  <p>One or two sentences on why it is worth someone's time.</p>
+</li>
+```
+
+The two groups are `Ministry in Sydney` and `Resources`; add a new
+`<h3 class="links-group">` if you want another. Do the same in
+`index-cn.html` for the Chinese page. The little ↗ after each link is added
+by the stylesheet — you do not type it.
+
 ---
 
 ## A standing decision about names
 
-The essays describe a real congregation and do not name it, and identifying
-details about individuals have been generalised. Two source citations are
-deliberately incomplete for the same reason — the parish history and the
-consultants' reports. If that ever changes, it should change on purpose.
+**The parish is named.** The title page links to St Paul's Anglican Church
+Kogarah, and the introduction names it. That was decided on 19 August 2026,
+after the one essay that criticised the congregation was withdrawn — see
+`private/README.md`.
 
-Note that the site carries the author's name, so this is a courtesy screen
-rather than true anonymity: a determined reader can work out which parish is
-meant. It raises the cost of recognising yourself in an unflattering
-paragraph; it does not make it impossible.
+The rule that replaced anonymity is simpler and holds better: **write about
+ideas and about yourself; do not publish an assessment of identifiable people
+who did not consent to it.** Anonymising a parish never really worked, since
+the site carries the author's name and the details converge. Not publishing
+the criticism does.
+
+So before publishing anything that describes the congregation, ask whether a
+member reading it would recognise themselves in an unflattering paragraph. If
+yes, it belongs in `private/`, or it needs rewriting as the general case.
 
 ## The mark
 
