@@ -130,7 +130,7 @@ essays-cn.html        Chinese browse page — holds its own const POSTS
 404.html
 style.css             the whole design, in one file
 add-post.py           the converter
-site.json             titles, author, domain — change them here
+site.json             titles, wordmark, author, domain — change them here
 manifest.webmanifest  home-screen install, English
 manifest-cn.webmanifest        …and Chinese
 icons/                the mark, at every size
@@ -150,6 +150,18 @@ to revise a piece, rather than editing the HTML.
 
 `add-post.py` needs `python-docx` for Word files:
 `pip3 install python-docx`
+
+## The wordmark
+
+Every inner page carries the same name as the title page — *Not Young, but
+Yung* in English, 翁 & Jung in Chinese — so the link back to home looks like
+home. It lives in `site.json` under `wordmark` and `tagline`, as small
+fragments of HTML, and is styled by the `.wm-*` rules at the end of
+`style.css`.
+
+Change it there and re-run `add-post.py … --force` on each essay to rebuild
+the mastheads. The two browse pages, `essays.html` and `essays-cn.html`, hold
+their own copy — edit those by hand to match.
 
 ## The title page
 

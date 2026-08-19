@@ -588,8 +588,8 @@ PAGE = """<!DOCTYPE html>
       <path d="M512 352V792M438 470H586" stroke="#E8B08C" stroke-width="23" stroke-linecap="round"/>
     </svg>
     <div>
-      <h1><a href="{home}" style="color:inherit;text-decoration:none">{site_title}</a></h1>
-      <p class="byline{label_class}">{author}</p>
+      <h1 class="wordmark"><a href="{home}">{wordmark}</a></h1>
+      <p class="byline tagline">{tagline}</p>
     </div>
   </div>
 </header>
@@ -865,6 +865,8 @@ def main():
         index=SITE["index"]["zh" if lang == "zh" else "en"],
         home=SITE["home"]["zh" if lang == "zh" else "en"],
         home_label=s["home_label"],
+        wordmark=SITE["wordmark"]["zh" if lang == "zh" else "en"],
+        tagline=SITE["tagline"]["zh" if lang == "zh" else "en"],
         author=html.escape(SITE["author"]["zh" if lang == "zh" else "en"]),
         footer=html.escape(SITE["footer"]["zh" if lang == "zh" else "en"]),
         back=s["back"],
