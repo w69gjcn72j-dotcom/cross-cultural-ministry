@@ -119,8 +119,11 @@ Your study libraries are untouched by any of this. They stay on their
 ## What's in here
 
 ```
-index.html            the title page — three doors and the links list
-index-cn.html         the Chinese title page
+index.html            the title page — the "Not Young, but Yung" hero, then
+                      the three doors and the links list. SELF-CONTAINED:
+                      its own inline CSS and JS, its own palette (ink and
+                      gold, EB Garamond), and it does NOT use style.css.
+index-cn.html         the Chinese title page, same hero
 essays.html           English browse page — holds const POSTS = [...]
 essays-cn.html        Chinese browse page — holds its own const POSTS
 00N-*.html            one file per essay
@@ -147,6 +150,25 @@ to revise a piece, rather than editing the HTML.
 
 `add-post.py` needs `python-docx` for Word files:
 `pip3 install python-docx`
+
+## The title page
+
+`index.html` carries the name-constellation hero — 32 forms of 翁 across the
+world's scripts. Three things control it, all near the bottom of the file:
+
+- `NAMES` — the array of `[text, language, note]`. Add or remove a form here.
+- `SPOTS` — `[x%, y%, size, peak-opacity]`, one per name, hand-placed so the
+  field reads as a constellation rather than a grid.
+- `SCALE` — overall size of the names. `NARROW_FACTOR` thins them on phones.
+
+`settle()` runs once the webfonts have loaded: it pushes overlapping names
+apart and keeps every one inside the frame, and re-runs on resize. It
+measures **relative to `#field`**, not the viewport, so it stays correct
+after the page has been scrolled.
+
+If you add to `NAMES` beyond the length of `SPOTS`, positions wrap around and
+names will land on top of each other before `settle()` pulls them apart — add
+a matching `SPOTS` entry too.
 
 ## Adding a link to the title page
 

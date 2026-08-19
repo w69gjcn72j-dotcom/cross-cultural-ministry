@@ -446,153 +446,15 @@ html[lang^="zh"] .essay { line-height: 2.0; font-size: 1.05rem; }
 .yt-cover:hover .yt-play svg { filter: drop-shadow(0 3px 14px rgba(0,0,0,.7)); }
 .yt-cover:focus-visible { outline: 2px solid var(--clay-soft); outline-offset: 3px; }
 
-/* ============================================================== title page */
-
-.hero {
-  padding: clamp(3rem, 8vw, 6rem) var(--pad) 2rem;
-  position: relative;
-}
-.hero-inner { max-width: 46rem; margin: 0 auto; position: relative; }
-
-.hero-mark { width: 84px; height: 84px; display: block; margin-bottom: 2rem; }
-
-.hero-lang { position: absolute; top: 0.4rem; right: 0; margin-left: 0; }
-
-.hero-title {
-  font-family: var(--display);
-  font-weight: 600;
-  font-size: clamp(2.1rem, 1.4rem + 3.2vw, 3.4rem);
-  line-height: 1.08;
-  letter-spacing: -0.025em;
-  margin: 0 0 0.7rem;
-}
-.hero-byline {
-  margin: 0 0 1.8rem;
-  font-size: 0.9rem;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--clay);
-}
-.hero-byline span[lang] { text-transform: none; letter-spacing: 0.1em; }
-
-.hero-standfirst {
-  font-family: var(--display);
-  font-size: clamp(1.08rem, 0.95rem + 0.5vw, 1.3rem);
-  line-height: 1.6;
-  color: var(--text-muted);
-  max-width: 32rem;
-  margin: 0 0 3.5rem;
-}
-
-/* ------------------------------------------------------------------ doors */
-
-.doors {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
-  gap: 1rem;
-}
-
-.door {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 1.6rem 1.5rem 1.5rem;
-  border: 1px solid var(--rule);
-  border-radius: 12px;
-  background: linear-gradient(180deg, rgba(11,44,43,0.55), rgba(11,44,43,0.15));
-  text-decoration: none;
-  color: inherit;
-  transition: border-color 0.18s ease, transform 0.18s ease, background 0.18s ease;
-}
-.door:hover, .door:focus-visible {
-  border-color: var(--clay-dim);
-  background: linear-gradient(180deg, rgba(20,64,61,0.7), rgba(11,44,43,0.25));
-  transform: translateY(-2px);
-}
-.door:focus-visible { outline: 2px solid var(--clay-soft); outline-offset: 3px; }
-
-.door-eyebrow {
-  font-size: 0.68rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--clay);
-}
-.door-title {
-  font-family: var(--display);
-  font-weight: 600;
-  font-size: 1.32rem;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-}
-.door-blurb {
-  font-size: 0.92rem;
-  line-height: 1.55;
-  color: var(--text-muted);
-  flex: 1 1 auto;
-}
-.door-go {
-  margin-top: 0.5rem;
-  font-size: 0.85rem;
-  color: var(--clay-soft);
-}
-.door:hover .door-go { color: var(--clay); }
-
-/* ------------------------------------------------------------------ links */
+/* --------------------------------------------------- essays page heading */
 
 .section-title {
   font-family: var(--display);
   font-weight: 600;
   font-size: 1.5rem;
   letter-spacing: -0.015em;
-  margin: 0 0 0.6rem;
+  margin: 0 0 0.8rem;
 }
 
-.links {
-  border-top: 1px solid var(--rule);
-  margin-top: 3.5rem;
-  padding: 3.5rem var(--pad) 1rem;
-  scroll-margin-top: 2rem;
-}
-.links-inner { max-width: 46rem; margin: 0 auto; }
-
-.links-intro { color: var(--text-muted); margin: 0 0 2.5rem; max-width: 30rem; }
-
-.links-group {
-  font-family: var(--body);
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--clay);
-  margin: 2.5rem 0 0.5rem;
-}
-.links-group:first-of-type { margin-top: 0; }
-
-.linklist { list-style: none; margin: 0; padding: 0; }
-.linklist li { border-top: 1px solid var(--rule); padding: 1.3rem 0; }
-.linklist li:last-child { border-bottom: 1px solid var(--rule); }
-.linklist a {
-  font-family: var(--display);
-  font-size: 1.13rem;
-  font-weight: 600;
-  line-height: 1.3;
-  text-decoration: none;
-  color: var(--text);
-}
-.linklist a:hover { color: var(--clay-soft); text-decoration: underline; }
-.linklist a::after { content: " ↗"; font-size: 0.75em; color: var(--clay); }
-.linklist p {
-  margin: 0.5rem 0 0;
-  font-size: 0.94rem;
-  line-height: 1.6;
-  color: var(--text-muted);
-  max-width: 38rem;
-}
-
-/* essays page heading */
-.wrap > .section-title { margin-bottom: 0.8rem; }
-
-@media (max-width: 480px) {
-  .hero-mark { width: 66px; height: 66px; }
-  .doors { grid-template-columns: 1fr; }
-}
+/* The title page (index.html / index-cn.html) is self-contained — its own
+   inline styles, its own palette, its own fonts. It does not use this file. */
