@@ -1,0 +1,24 @@
+{
+  "domain": "yungs.au",
+  "base_url": "https://yungs.au",
+  "author": {
+    "en": "Rev David Yung",
+    "zh": "翁沛偉牧師"
+  },
+  "title": {
+    "en": "Cross-Cultural Ministry",
+    "zh": "跨文化事奉"
+  },
+  "footer": {
+    "en": "Rev David Yung 翁沛偉牧師",
+    "zh": "翁沛偉牧師 Rev David Yung"
+  },
+  "index": {
+    "en": "index.html",
+    "zh": "index-cn.html"
+  },
+  "suffix": {
+    "en": "",
+    "zh": "-cn"
+  }
+}

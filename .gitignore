@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+._*
+
+# Word lock files
+~$*
+
+# Python
+__pycache__/
+*.pyc
+
+# Never published — private working copies live here
+private/

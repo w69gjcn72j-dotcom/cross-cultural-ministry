@@ -1,0 +1,43 @@
+<svg viewBox="0 0 760 400" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="A receding perspective view. Four bars sit at increasing distance from the viewer, labelled foreground ninety days, midground one year, background three years, and beyond the horizon five to twenty years."
+     font-family="Inter Tight, system-ui, -apple-system, sans-serif">
+
+  <!-- horizon -->
+  <line x1="40" y1="90" x2="520" y2="90" stroke="#92705E" stroke-width="2"/>
+  <text x="40" y="76" fill="#6F8B87" font-size="13" letter-spacing="1.6">HORIZON</text>
+
+  <!-- converging edges -->
+  <line x1="40"  y1="370" x2="280" y2="90" stroke="#9DB4AF" stroke-width="1.5" stroke-opacity="0.35"/>
+  <line x1="520" y1="370" x2="280" y2="90" stroke="#9DB4AF" stroke-width="1.5" stroke-opacity="0.35"/>
+
+  <!-- the four vision horizons, nearest first -->
+  <g stroke="#C96F4C" stroke-width="7" stroke-linecap="round">
+    <line x1="66"  y1="340" x2="494" y2="340"/>
+    <line x1="134" y1="260" x2="426" y2="260" stroke-opacity="0.88"/>
+    <line x1="194" y1="190" x2="366" y2="190" stroke-opacity="0.76"/>
+    <line x1="246" y1="130" x2="314" y2="130" stroke-opacity="0.64"/>
+  </g>
+
+  <!-- leaders -->
+  <g stroke="#9DB4AF" stroke-width="1" stroke-opacity="0.4" stroke-dasharray="3 4">
+    <line x1="500" y1="340" x2="556" y2="340"/>
+    <line x1="432" y1="260" x2="556" y2="260"/>
+    <line x1="372" y1="190" x2="556" y2="190"/>
+    <line x1="320" y1="130" x2="556" y2="130"/>
+  </g>
+
+  <!-- labels -->
+  <g fill="#ECF1EE" font-size="16">
+    <text x="566" y="334">Foreground</text>
+    <text x="566" y="254">Midground</text>
+    <text x="566" y="184">Background</text>
+    <text x="566" y="118">Beyond the</text>
+    <text x="566" y="138">horizon</text>
+  </g>
+  <g fill="#9DB4AF" font-size="14">
+    <text x="566" y="354">90 days</text>
+    <text x="566" y="274">1 year</text>
+    <text x="566" y="204">3 years</text>
+    <text x="566" y="158">5–20 years</text>
+  </g>
+</svg>

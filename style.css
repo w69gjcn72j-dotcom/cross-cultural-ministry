@@ -1,0 +1,447 @@
+/* ---------------------------------------------------------------
+   Cross-Cultural Ministry — yungs.au
+   Rev David Yung 翁沛偉牧師
+   Shared stylesheet. Every page links to this one file, so a change
+   here changes the whole site.
+   --------------------------------------------------------------- */
+
+:root {
+  /* Ground — deep teal ink */
+  --ink:         #06201F;
+  --ink-raised:  #0B2C2B;
+  --ink-edge:    #14403D;
+
+  /* Accent — terracotta */
+  --clay:        #C96F4C;
+  --clay-soft:   #E0906C;
+  --clay-dim:    rgba(201, 111, 76, 0.22);
+
+  /* Type */
+  --text:        #ECF1EE;
+  --text-muted:  #9DB4AF;
+  --text-faint:  #6F8B87;
+
+  --rule:        rgba(157, 180, 175, 0.18);
+
+  --display: "Fraunces", Georgia, "Songti SC", "Noto Serif SC", serif;
+  --body:    "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI",
+             "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+
+  --measure: 36rem;   /* essay measure — narrow, for long reading */
+  --pad:     1.5rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ink);
+  background-image:
+    radial-gradient(120% 80% at 50% -10%, #0E3634 0%, rgba(6,32,31,0) 60%);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 18px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: var(--clay-soft); text-decoration-color: var(--clay-dim); text-underline-offset: 3px; }
+a:hover { color: var(--clay); }
+
+/* ---------------------------------------------------------- masthead */
+
+.masthead {
+  border-bottom: 1px solid var(--rule);
+  padding: 2.25rem var(--pad) 1.75rem;
+}
+.masthead-inner {
+  max-width: 46rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.mark { width: 46px; height: 46px; flex: 0 0 auto; display: block; }
+.masthead h1 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1.35rem, 1.05rem + 1.3vw, 1.9rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+.masthead .byline {
+  margin: 0.3rem 0 0;
+  font-size: 0.83rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.masthead .byline.cjk { text-transform: none; letter-spacing: 0.08em; }
+
+.langswitch {
+  margin-left: auto;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: var(--text-faint);
+  text-decoration: none;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  white-space: nowrap;
+  align-self: flex-start;
+}
+.langswitch:hover { color: var(--clay-soft); border-color: var(--clay-dim); }
+
+/* ------------------------------------------------------------- shell */
+
+.wrap { max-width: 46rem; margin: 0 auto; padding: 2.5rem var(--pad) 4rem; }
+.wrap.narrow { max-width: calc(var(--measure) + 2 * var(--pad)); }
+
+.standfirst {
+  font-family: var(--display);
+  font-size: 1.08rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0 0 2.5rem;
+  max-width: 32rem;
+}
+
+/* -------------------------------------------------------- post list */
+
+.posts { list-style: none; margin: 0; padding: 0; }
+
+.posts li { border-top: 1px solid var(--rule); }
+.posts li:last-child { border-bottom: 1px solid var(--rule); }
+
+.posts a {
+  display: block;
+  padding: 1.5rem 0;
+  text-decoration: none;
+  color: inherit;
+}
+.posts a:hover .post-title { color: var(--clay-soft); }
+
+.post-meta {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  display: flex;
+  gap: 0.7rem;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+.post-meta .num { color: var(--clay); font-variant-numeric: tabular-nums; }
+.post-meta.cjk { text-transform: none; letter-spacing: 0.06em; }
+
+.post-title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.28rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin: 0.45rem 0 0.4rem;
+  transition: color 0.15s ease;
+}
+.post-blurb { margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.55; }
+
+.empty {
+  border: 1px dashed var(--rule);
+  border-radius: 10px;
+  padding: 2rem;
+  color: var(--text-faint);
+  text-align: center;
+}
+
+/* ------------------------------------------------------------ essay */
+
+.essay-head { margin: 0 0 2.5rem; }
+.essay-head .post-meta { margin-bottom: 0.8rem; }
+.essay-head h1 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1.75rem, 1.3rem + 2vw, 2.5rem);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.summary {
+  border-left: 2px solid var(--clay);
+  background: var(--ink-raised);
+  border-radius: 0 8px 8px 0;
+  padding: 1.1rem 1.3rem;
+  margin: 1.8rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.97rem;
+  line-height: 1.6;
+}
+.summary .label {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--clay);
+  margin-bottom: 0.45rem;
+}
+.summary .label.cjk { text-transform: none; letter-spacing: 0.12em; }
+
+.essay {
+  font-size: 1.12rem;
+  line-height: 1.95;             /* looser than the study sheets */
+  max-width: var(--measure);
+}
+.essay p { margin: 0 0 1.5rem; }
+.essay > p:first-of-type::first-line { letter-spacing: 0.005em; }
+
+.essay h2 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.3rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin: 3rem 0 1.1rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--rule);
+  color: var(--text);
+}
+.essay h3 {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--clay);
+  margin: 2.2rem 0 0.8rem;
+}
+.essay h3.cjk { text-transform: none; letter-spacing: 0.1em; font-size: 0.95rem; }
+
+.essay blockquote {
+  margin: 2rem 0;
+  padding: 0 0 0 1.4rem;
+  border-left: 2px solid var(--clay-dim);
+  font-family: var(--display);
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+.essay blockquote p:last-child { margin-bottom: 0; }
+
+.essay ul, .essay ol { margin: 0 0 1.5rem; padding-left: 1.3rem; }
+.essay li { margin-bottom: 0.6rem; }
+.essay li::marker { color: var(--clay); }
+
+.essay strong { color: #FFF; font-weight: 600; }
+.essay em { font-style: italic; }
+
+.essay hr { border: 0; border-top: 1px solid var(--rule); margin: 3rem 0; }
+
+.essay table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 1.8rem;
+  font-size: 0.95rem;
+}
+.essay th, .essay td {
+  border: 1px solid var(--rule);
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+.essay th { background: var(--ink-raised); font-weight: 600; }
+
+/* ----------------------------------------------------------- footer */
+
+.footer {
+  border-top: 1px solid var(--rule);
+  margin-top: 4rem;
+  padding: 2rem var(--pad) 3rem;
+  color: var(--text-faint);
+  font-size: 0.85rem;
+  text-align: center;
+}
+.footer-inner { max-width: 46rem; margin: 0 auto; }
+.footer p { margin: 0.3rem 0; }
+.footer a { color: var(--text-muted); }
+
+.backlink {
+  display: inline-block;
+  margin-bottom: 2rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-faint);
+}
+.backlink:hover { color: var(--clay-soft); }
+.backlink.cjk { text-transform: none; letter-spacing: 0.06em; }
+
+/* Chinese text wants a little more room between lines */
+html[lang^="zh"] body { line-height: 1.8; }
+html[lang^="zh"] .essay { line-height: 2.0; font-size: 1.05rem; }
+
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  .masthead { padding-top: 1.75rem; }
+  .mark { width: 38px; height: 38px; }
+}
+
+@media print {
+  body { background: #fff; color: #000; }
+  .masthead, .footer, .backlink, .langswitch { display: none; }
+  .essay { max-width: none; }
+}
+
+/* ----------------------------------------------------------- figures */
+
+.essay figure {
+  margin: 2.5rem 0;
+  padding: 0;
+}
+.essay figure img,
+.essay figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--ink-raised);
+}
+.essay figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-faint);
+}
+.essay figcaption .fig-label {
+  color: var(--clay);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  margin-right: 0.5rem;
+}
+
+/* Figures may run wider than the reading measure */
+.essay figure.wide {
+  width: min(46rem, calc(100vw - 2 * var(--pad)));
+  margin-left: calc((var(--measure) - min(46rem, 100vw - 2 * var(--pad))) / 2);
+}
+@media (max-width: 46rem) {
+  .essay figure.wide { width: 100%; margin-left: 0; }
+}
+
+/* ----------------------------------------------------------- sources */
+
+.essay h2.sources-head { font-size: 1.05rem; }
+
+.essay .sources {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+.essay .sources li {
+  padding-left: 1.4rem;
+  text-indent: -1.4rem;   /* hanging indent, as a reference list wants */
+  margin-bottom: 0.8rem;
+}
+.essay .sources li::marker { content: ""; }
+
+/* ------------------------------------------------------------- video */
+
+.videoslot {
+  margin: 0 0 2.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--ink-raised);
+}
+.videoslot video { display: block; width: 100%; height: auto; background: #000; }
+.videoslot .placeholder {
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: var(--text-faint);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.videoslot .placeholder svg { width: 54px; height: 54px; margin-bottom: 1rem; opacity: 0.75; }
+.videoslot .placeholder code {
+  color: var(--clay-soft);
+  font-size: 0.85em;
+  background: rgba(201, 111, 76, 0.10);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+
+/* ------------------------------------------------------- editor note */
+
+.note {
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  margin: 0 0 2.5rem;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--text-faint);
+}
+.note strong { color: var(--text-muted); }
+
+/* --------------------------------------------------- embedded video */
+
+.essay figure.ytwrap { margin: 0 0 2.5rem; }
+
+.yt {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
+}
+.essay .yt iframe,
+.yt iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+.yt-cover {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  position: relative;
+}
+.essay .yt-cover img,
+.yt-cover img {
+  width: 100%;
+  height: 100%;
+  /* the 4:3 thumbnail is cropped to 16:9, which removes YouTube's bars */
+  object-fit: cover;
+  display: block;
+  border: 0;
+  border-radius: 0;
+  opacity: 0.82;
+  transition: opacity 0.2s ease, transform 0.4s ease;
+}
+.essay .yt-cover:hover img,
+.essay .yt-cover:focus-visible img,
+.yt-cover:hover img,
+.yt-cover:focus-visible img { opacity: 1; transform: scale(1.015); }
+
+.yt-play {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 78px;
+  pointer-events: none;
+}
+.yt-play svg { width: 100%; height: auto; display: block; filter: drop-shadow(0 3px 10px rgba(0,0,0,.5)); }
+.yt-cover:hover .yt-play svg { filter: drop-shadow(0 3px 14px rgba(0,0,0,.7)); }
+.yt-cover:focus-visible { outline: 2px solid var(--clay-soft); outline-offset: 3px; }

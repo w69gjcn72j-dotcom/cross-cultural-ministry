@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cross-Cultural Ministry — Rev David Yung</title>
+<meta name="description" content="Essays on cross-cultural ministry by Rev David Yung 翁沛偉牧師 — a Hong Kong–born minister serving in a Sydney Anglican parish.">
+<meta name="theme-color" content="#06201F">
+<meta property="og:title" content="Cross-Cultural Ministry — Rev David Yung">
+<meta property="og:description" content="Essays on cross-cultural ministry from a Hong Kong–born minister serving in a Sydney Anglican parish.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yungs.au/">
+<meta property="og:image" content="https://yungs.au/icons/icon-512.png">
+<link rel="canonical" href="https://yungs.au/">
+<link rel="alternate" hreflang="en" href="https://yungs.au/">
+<link rel="alternate" hreflang="zh" href="https://yungs.au/index-cn.html">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Cross-Cultural">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <svg class="mark" viewBox="0 0 1024 1024" role="img" aria-label="Two overlapping circles with a cross standing in the overlap">
+      <rect width="1024" height="1024" rx="190" fill="#06201F"/>
+      <line x1="152" y1="690" x2="872" y2="690" stroke="#92705E" stroke-width="16"/>
+      <circle cx="410" cy="540" r="205" fill="none" stroke="#C96F4C" stroke-width="20"/>
+      <circle cx="614" cy="540" r="205" fill="none" stroke="#C96F4C" stroke-width="20"/>
+      <path d="M512 352V792M438 470H586" stroke="#E8B08C" stroke-width="23" stroke-linecap="round"/>
+    </svg>
+    <div>
+      <h1>Cross-Cultural Ministry</h1>
+      <p class="byline">Rev David Yung</p>
+    </div>
+    <a class="langswitch" href="index-cn.html" hreflang="zh" lang="zh-Hant">中文</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <p class="standfirst">
+    Writing on the gospel across cultures — from a Hong Kong–born minister
+    who has lived in Australia since 1983 and serves in a Sydney Anglican parish.
+  </p>
+
+  <ul class="posts" id="posts"></ul>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <p>Rev David Yung 翁沛偉牧師</p>
+    <p><a href="index-cn.html" hreflang="zh" lang="zh-Hant">中文</a></p>
+  </div>
+</footer>
+
+<script>
+/* ---------------------------------------------------------------------
+   POSTS — the browse list for the English site.
+   add-post.py writes new entries in here. You can also edit by hand:
+   keep the newest first, and keep the shape of each entry the same.
+   --------------------------------------------------------------------- */
+const POSTS = [
+  {
+    n: 5,
+    date: "2026-08-19",
+    slug: "005-being-the-church-multi-ethnic.html",
+    title: "Being the Church in a Multi-Ethnic Community",
+    blurb: "Why the multi-ethnic congregation and the monocultural congregation are both legitimate, why a church has to decide what kind of neighbour it is, and what it costs to plant a parallel congregation…"
+  },
+  {
+    n: 4,
+    date: "2026-08-19",
+    slug: "004-god-dreams.html",
+    title: "God Dreams: Vision on Four Horizons",
+    blurb: "Will Mancini's insight that a church's vision has to focus at several distances at once — and what that has looked like as we have begun to work it through."
+  },
+  {
+    n: 3,
+    date: "2026-08-19",
+    slug: "003-intercultural-competence.html",
+    title: "Intercultural Competence",
+    blurb: "Michael Chu's four factors of cultural intelligence, the three conflicts they explain, and why a minister's cultural illiteracy is not a personality quirk but a pastoral problem."
+  },
+  {
+    n: 2,
+    date: "2026-08-19",
+    slug: "002-challenges-and-change-strategies.html",
+    title: "Challenges and Change Strategies for a Multicultural Immigrant Church",
+    blurb: "Four challenges facing a bilingual immigrant congregation trying to disciple three generations and their neighbours — and five things I would do about them."
+  },
+  {
+    n: 1,
+    date: "2026-08-19",
+    slug: "001-an-introduction.html",
+    title: "An Introduction",
+    blurb: "Who I am, the parish I serve, and why a Hong Kong–born minister in a Sydney Anglican church has spent the last year thinking about cross-cultural ministry."
+  }
+];
+/* --------------------------------------------------------------- end POSTS */
+
+const MONTHS = ["January","February","March","April","May","June",
+                "July","August","September","October","November","December"];
+
+function prettyDate(iso) {
+  const [y, m, d] = iso.split("-").map(Number);
+  if (!y || !m || !d) return iso;
+  return d + " " + MONTHS[m - 1] + " " + y;
+}
+
+const list = document.getElementById("posts");
+
+if (!POSTS.length) {
+  list.outerHTML = '<div class="empty">No essays yet.</div>';
+} else {
+  // newest first, whatever order the entries happen to sit in
+  const ordered = POSTS.slice().sort((a, b) => (b.n || 0) - (a.n || 0));
+  list.innerHTML = ordered.map(p => `
+    <li>
+      <a href="${p.slug}">
+        <div class="post-meta">
+          <span class="num">${String(p.n).padStart(3, "0")}</span>
+          <span>${prettyDate(p.date)}</span>
+        </div>
+        <h2 class="post-title">${p.title}</h2>
+        ${p.blurb ? `<p class="post-blurb">${p.blurb}</p>` : ""}
+      </a>
+    </li>`).join("");
+}
+</script>
+
+</body>
+</html>

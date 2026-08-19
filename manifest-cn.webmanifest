@@ -1,0 +1,17 @@
+{
+  "name": "跨文化事奉 — 翁沛偉牧師",
+  "short_name": "跨文化事奉",
+  "description": "翁沛偉牧師的跨文化事奉文章。",
+  "lang": "zh-Hant",
+  "start_url": "/index-cn.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#06201F",
+  "theme_color": "#06201F",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
